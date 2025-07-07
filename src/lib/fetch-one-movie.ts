@@ -1,8 +1,8 @@
-import { MovieItem } from "@/types";
+import { MovieData } from "@/types";
 
 export default async function fetchOneMovie(
     id:number
-):Promise<MovieItem | null>{
+):Promise<MovieData | null>{
     const url=`http://localhost:12345/movie/${id}`;
 
     try{

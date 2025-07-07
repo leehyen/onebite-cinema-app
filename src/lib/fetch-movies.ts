@@ -1,6 +1,6 @@
-import { MovieItem } from "@/types";
+import { MovieData } from "@/types";
 
-export default async function fetchBooks(q?:string):Promise<MovieItem[]>{//서버로부터 모든 책들의 정보를 불러옴
+export default async function fetchBooks(q?:string):Promise<MovieData[]>{//서버로부터 모든 책들의 정보를 불러옴
     let url=`http://localhost:12345/movie`;
     if(q){
         url+=`/search?q=${q}`

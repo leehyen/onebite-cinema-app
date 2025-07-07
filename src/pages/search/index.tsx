@@ -1,27 +1,25 @@
 import SearchableLayout from "@/components/searchabel-layout";
-import { ReactNode } from "react";
-import movies from "@/mock/dummy.json"
-import MovieItem from "@/components/movie-item"; 
+import { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { GetServerSidePropsContext, InferGetStaticPropsType } from "next";
+import MovieItem from "@/components/movie-item";
 import fetchMovies from "@/lib/fetch-movies";
+import { MovieData } from "@/types";
 
-export const getServerSideProps=async(
-    conetxt:GetServerSidePropsContext
-)=>{
-    const q=conetxt.query.q;
-    const movies=await fetchMovies(q as string);
-    return{
-        props:{
-            movies,
-        },
+export default function Page(){
+
+    const[movies,setMovies]=useState<MovieData[]>([])
+    const router=useRouter();
+    const q=router.query.q;
+
+    const fetchSearchResult=async()=>{
+        const data=await fetchMovies(q as string);
+        setMovies(data);
     };
-}
-
-export default function Page({
-   movies,
-}:InferGetStaticPropsType<typeof getServerSideProps>){
-
+    useEffect(()=>{
+        if(q){ //검색어있다면
+            fetchSearchResult();
+        }
+    },[q]);
     return(
         <div>
            {movies.map((movie) => (
