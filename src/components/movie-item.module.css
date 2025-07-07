@@ -1,0 +1,26 @@
+/* movie-item.module.css */
+.container {
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  gap: 10px;
+}
+
+.img30 {
+  width: 32%;
+  margin: 3px;
+}
+
+.img20 {
+  width: 19%;
+  margin: 4px;
+}
+
+
+.title{
+    font-weight: bold;
+}
+
+.subTitle{
+    word-break: keep-all;/*한 줄이 넘어가더라도 이쁘게 유지도되록*/
+}

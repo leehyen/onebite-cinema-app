@@ -1,7 +1,9 @@
-.h1{
-    color: red;
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /*section태그 간의 간격을 벌려줌*/
 }
 
-.h2{
-    color: white;
+.container h3{
+    margin-bottom: 0px;
 }

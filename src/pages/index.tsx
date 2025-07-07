@@ -1,10 +1,30 @@
 import SearchableLayout from "@/components/searchabel-layout";
 import { ReactNode } from "react";
+import movies from "@/mock/dummy.json"; //@는 src폴더를 가르키는 경로
+import style from "./index.module.css";
+import MovieItem from "@/components/movie-item";
 
 export default function Home() {
   return (
-    <>
-    </>
+    <div className={style.container}>
+      <section>
+        <h3>지금 가장 추천하는 영화</h3>
+        <div>
+          {movies.slice(0, 3).map((movie) => (
+            <MovieItem key={movie.id} {...movie} imgSize="30"/>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h3>등록한 모든 영화</h3>
+        <div>
+          {movies.slice(3).map((movie) => (
+            <MovieItem key={movie.id} {...movie} imgSize="20" />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
 
