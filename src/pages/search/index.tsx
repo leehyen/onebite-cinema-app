@@ -3,26 +3,32 @@ import { ReactNode } from "react";
 import movies from "@/mock/dummy.json"
 import MovieItem from "@/components/movie-item"; 
 import { useRouter } from "next/router";
+import { GetServerSidePropsContext, InferGetStaticPropsType } from "next";
+import fetchMovies from "@/lib/fetch-movies";
 
-export default function Page(){
-    const router = useRouter();
-    const q = (router.query.q || "") as string;
+export const getServerSideProps=async(
+    conetxt:GetServerSidePropsContext
+)=>{
+    const q=conetxt.query.q;
+    const movies=await fetchMovies(q as string);
+    return{
+        props:{
+            movies,
+        },
+    };
+}
 
-    //아무것도 검색안하면 3개만 나오도록
-    const filtered = movies.filter((movie) =>
-        movie.title.toLowerCase().includes(q.toLowerCase())
-    ).slice(0, 3);
-
+export default function Page({
+   movies,
+}:InferGetStaticPropsType<typeof getServerSideProps>){
 
     return(
         <div>
-            {filtered.length > 0 ? (filtered.map((movie) => (
+           {movies.map((movie) => (
                 <MovieItem key={movie.id} {...movie} />
-            ))) : (
-                <p>검색 결과가 없습니다.</p>
-            )}
+            ))}
         </div>
-    )
+    );
 }
 
 //페이지별 개별 레이아웃 설정하고싶으면
