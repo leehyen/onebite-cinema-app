@@ -1,7 +1,7 @@
 import { MovieData } from "@/types";
 
 export default async function fetchBooks(q?:string):Promise<MovieData[]>{//서버로부터 모든 책들의 정보를 불러옴
-    let url=`http://localhost:12345/movie`;
+    let url=`https://onebite-cinema-api-main-three.vercel.app/movie`;
     if(q){
         url+=`/search?q=${q}`
     }
